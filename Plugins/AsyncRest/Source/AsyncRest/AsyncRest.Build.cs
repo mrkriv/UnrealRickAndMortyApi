@@ -31,6 +31,9 @@ public class AsyncRest : ModuleRules
 			{
 				"CoreUObject",
 				"Engine",
+				"HTTP",
+				"JSON",
+				"JsonUtilities",
 				"Slate",
 				"SlateCore",
 			}
