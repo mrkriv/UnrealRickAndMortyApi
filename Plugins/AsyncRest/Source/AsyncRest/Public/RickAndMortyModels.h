@@ -3,7 +3,7 @@
 #include "RickAndMortyModels.generated.h"
 
 USTRUCT(Blueprintable)
-struct FRaMPageResponse
+struct FRaMPageInfoResponse
 {
     GENERATED_BODY()
 
@@ -29,6 +29,7 @@ struct FRaMLocation
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FString Name;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FString Url;
 };
@@ -41,38 +42,49 @@ struct FRaMCharacter
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int Id;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FString Name;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FString Status;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FString Species;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FString Type;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FString Gender;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FRaMLocation Origin;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FRaMLocation Location;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FString Image;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     TArray<FString> Episode;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FString Url;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FDateTime Created;
 };
 
 USTRUCT(Blueprintable)
-struct FRaMCharactersResponse
+struct FRaMCharacterPageResponse
 {
     GENERATED_BODY()
 
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    FRaMPageResponse Info;
+    FRaMPageInfoResponse Info;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     TArray<FRaMCharacter> Results;

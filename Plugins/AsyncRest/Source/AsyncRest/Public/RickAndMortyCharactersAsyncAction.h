@@ -1,16 +1,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "HttpModule.h"
 #include "Kismet/BlueprintAsyncActionBase.h"
 #include "RickAndMortyModels.h"
+
 #include "RickAndMortyCharactersAsyncAction.generated.h"
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRestObjectRequestResult, FRaMCharactersResponse, Result, FString, Response);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FRandomRickAndMortyCharacterResult, FRaMCharacter, Character, UTexture2DDynamic*, Texture, FString, ErrorMessage);
 
 /**
- * 
+ * Get random character of RickAndMorty world from fun API 
  */
 UCLASS()
 class URickAndMortyCharactersAsyncAction : public UBlueprintAsyncActionBase
@@ -19,20 +19,29 @@ class URickAndMortyCharactersAsyncAction : public UBlueprintAsyncActionBase
 public:
 	
     UPROPERTY(BlueprintAssignable)
-    FRestObjectRequestResult OnSuccess;
+    FRandomRickAndMortyCharacterResult OnSuccess;
 
 	UPROPERTY(BlueprintAssignable)
-    FRestObjectRequestResult OnFailure;
+    FRandomRickAndMortyCharacterResult OnFailure;
 
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "Fun|RickAndMorty")
-    static URickAndMortyCharactersAsyncAction* GetRickAndMortyCharacters(int page);
+    static URickAndMortyCharactersAsyncAction* GetRandomRickAndMortyCharacter();
 
 	// UBlueprintAsyncActionBase interface
 	virtual void Activate() override;
 	// End of UBlueprintAsyncActionBase interface
 
 private:
-    void OnRequestCompleted(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
+	static int CharactersCount;
+	FRaMCharacter Character;
+	
+	void LoadCharactersCount();
+	void LoadCharacter();
+	void LoadImage();
 
-	int Page;
+	UFUNCTION()
+	void OnLoadImage(UTexture2DDynamic* Texture);
+	
+	UFUNCTION()
+	void OnLoadImageFailed(UTexture2DDynamic* Texture);
 };

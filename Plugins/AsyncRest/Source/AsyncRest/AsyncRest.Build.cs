@@ -36,6 +36,7 @@ public class AsyncRest : ModuleRules
 				"JsonUtilities",
 				"Slate",
 				"SlateCore",
+				"UMG",
 			}
 			);
 		
